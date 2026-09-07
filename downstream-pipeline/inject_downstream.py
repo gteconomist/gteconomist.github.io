@@ -91,6 +91,9 @@ FAMILIES = {
         {"name": "Industry research engagement", "status": "building",
          "desc": "Industry-sponsored research expenditures and active corporate research agreements.",
          "metrics": "Source: GT research accounting + NSF HERD"},
+        {"name": "Scholarship & recognition", "status": "building",
+         "desc": "Books published, scholarly output, humanities research funding, and faculty honors on the National Research Council list &mdash; the indicators the AAU uses, and the arts, humanities and social-science side of the Institute's research footprint.",
+         "metrics": "Source: OpenAlex + NEH grant data + GT Institutional Research"},
     ],
     "tier2": [
         {"name": "Startup growth & retention", "status": "planned",
@@ -235,6 +238,96 @@ def build_family_e(output_dir: Path):
             }}
 
 
+def build_family_g(output_dir: Path):
+    """Family G — scholarship & recognition. Public pulls (OpenAlex books/output, NEH grants)
+    bring the card live on their own; the GT intake (NRC awards, academy members, Academic
+    Analytics books, HERD non-S&E) layers on top when supplied."""
+    po = output_dir / "openalex_summary.json"
+    pn = output_dir / "neh_summary.json"
+    pi = output_dir / "internal_scholarship.json"
+    if not po.exists():
+        return None
+    oa = json.loads(po.read_text())
+    neh = json.loads(pn.read_text()) if pn.exists() else None
+    intake = json.loads(pi.read_text()).get("metrics", {}) if pi.exists() else {}
+
+    def yr_series(d):
+        return {int(y): v for y, v in (d or {}).items() if str(y).isdigit()}
+
+    books = yr_series(oa.get("books_filtered_by_year") or oa.get("books_by_year"))
+    ahss = yr_series(oa.get("ahss_books_by_year"))
+    chapters = yr_series(oa.get("chapters_by_year"))
+    wc = {int(y): v for y, v in (oa.get("works_citations_by_year") or {}).items() if str(y).isdigit()}
+    if not books:
+        return None
+    years = sorted(books)
+    latest = years[-1]
+    fields = oa.get("books_by_field") or {}
+    ahss_names = {"Arts and Humanities", "Social Sciences", "Economics, Econometrics and Finance",
+                  "Psychology", "Business, Management and Accounting", "Decision Sciences"}
+    ahss_total = sum(v for k, v in fields.items() if k in ahss_names)
+
+    def intake_series(key):
+        return dict(sorted((int(y), v) for y, v in ((intake.get(key) or {}).get("by_year") or {}).items()
+                           if str(y).isdigit()))
+
+    def intake_latest(key):
+        ser = intake_series(key)
+        return {"year": max(ser), "value": ser[max(ser)]} if ser else None
+
+    honors = {
+        "awards": intake_latest("highly_prestigious_awards"),
+        "awards_ahss": intake_latest("highly_prestigious_awards_ahss"),
+        "academy_members": intake_latest("national_academy_members"),
+        "society_members": intake_latest("honorary_society_members"),
+        "books_aa": intake_latest("books_published"),
+        "nonse_usd": intake_latest("nonse_research_expenditures_usd"),
+        "awards_trend": [{"year": y, "value": v} for y, v in intake_series("highly_prestigious_awards").items()],
+    }
+
+    neh_block = None
+    if neh:
+        by = {int(y): v for y, v in (neh.get("by_year") or {}).items() if str(y).isdigit()}
+        neh_block = {"span": [neh.get("year_from"), neh.get("year_to")],
+                     "awards": neh["cumulative"]["awards"], "usd": round(neh["cumulative"]["usd"]),
+                     "by_year": [{"year": y, "awards": v["awards"], "usd": round(v["usd"])} for y, v in sorted(by.items())],
+                     "by_division": neh.get("by_division", {}), "by_program": neh.get("by_program", {})}
+
+    # Card copy: honors lead if GT has supplied them, otherwise books lead.
+    if honors["awards"]:
+        a = honors["awards"]
+        card = (f"<b>{a['value']:,}</b> highly prestigious faculty awards ({a['year']}) &middot; "
+                f"<b>{books[latest]:,}</b> books ({latest})")
+    else:
+        card = (f"<b>{books[latest]:,}</b> books &amp; monographs ({latest}) &middot; "
+                f"<b>{ahss.get(latest, 0):,}</b> in arts, humanities &amp; social sciences")
+        if neh_block:
+            card += (f" &middot; <b>{neh_block['awards']}</b> NEH awards since {neh_block['span'][0]}")
+
+    return {"metrics": card,
+            "data": {
+                "latest_year": latest,
+                "span": [years[0], years[-1]],
+                "latest": {"books": books[latest], "books_ahss": ahss.get(latest, 0),
+                           "chapters": chapters.get(latest, 0),
+                           "works": (wc.get(latest) or {}).get("works"),
+                           "citations": (wc.get(latest) or {}).get("citations")},
+                "cumulative": {"books": sum(books.values()), "books_ahss": sum(ahss.values()),
+                               "chapters": sum(chapters.values()),
+                               "works": sum(v.get("works", 0) for v in wc.values()),
+                               "citations": sum(v.get("citations", 0) for v in wc.values())},
+                "books_trend": [{"year": y, "value": books[y]} for y in years],
+                "ahss_trend": [{"year": y, "value": ahss.get(y, 0)} for y in years],
+                "works_trend": [{"year": y, "value": wc[y]["works"]} for y in sorted(wc) if wc[y].get("works")],
+                "books_by_field": [{"label": k, "count": v} for k, v in list(fields.items())[:9]],
+                "ahss_field_share": (ahss_total / sum(fields.values())) if fields else None,
+                "excluded_count": oa.get("excluded_count", 0),
+                "neh": neh_block,
+                "honors": honors,
+                "pulled": oa.get("pulled"),
+            }}
+
+
 def build_family_f(output_dir: Path):
     """Read IPEDS degrees-conferred summary, if present, to bring Family F live."""
     p = output_dir / "ipeds_summary.json"
@@ -307,6 +400,14 @@ def build_data() -> dict:
                 fam["status"] = "live"
                 fam["metrics"] = fe["metrics"]
 
+    # Family G (OpenAlex + NEH + scholarship intake) — bring the card live if the pulls exist.
+    fg = build_family_g(OUTPUT_DIR)
+    if fg:
+        for fam in families["tier1"]:
+            if fam["name"] == "Scholarship & recognition":
+                fam["status"] = "live"
+                fam["metrics"] = fg["metrics"]
+
     result = {
         "meta": {"latest_year": latest_year,
                  "updated": datetime.date.today().isoformat(),
@@ -329,6 +430,8 @@ def build_data() -> dict:
         result["familyA"] = fa["data"]
     if fe:
         result["familyE"] = fe["data"]
+    if fg:
+        result["familyG"] = fg["data"]
     return result
 
 
@@ -338,13 +441,19 @@ def inject(data: dict) -> None:
     e = html.find(END)
     if s == -1 or e == -1:
         raise SystemExit("DOWNSTREAM_DATA markers not found in index.html")
-    e_line_end = html.find("\n", e) + 1
+    # Keep everything after the END marker itself — including anything else on that
+    # line (the Tier 3 block's comment header once got swallowed this way). Also
+    # ensure the marker is followed by a newline.
+    e_end = e + len(END)
+    tail = html[e_end:]
+    if not tail.startswith("\n"):
+        tail = "\n" + tail.lstrip(" ")
     block = ("/* DOWNSTREAM_DATA_START — regenerated by pipeline/inject_downstream.py */\n"
              "const DOWNSTREAM = " + json.dumps(data, indent=2) + ";\n"
              "/* DOWNSTREAM_DATA_END */")
     # Rewind start to the beginning of its line to keep indentation clean.
     s_line_start = html.rfind("\n", 0, s) + 1
-    new_html = html[:s_line_start] + block + html[e_line_end:]
+    new_html = html[:s_line_start] + block + tail
     SITE.write_text(new_html)
 
 

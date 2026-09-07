@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 """
-Track 1 - Families A & E: read the filled GT internal intake templates into summary JSON.
+Track 1 - Families A, E & G: read the filled GT internal intake templates into summary JSON.
 
 Reads the 'Data' sheet of an intake workbook (GT_Licensing_Startups_Intake.xlsx or
 GT_Industry_Research_Intake.xlsx), pulls each metric's values by fiscal year, and writes
   output/internal_licensing.json   (Family A)
   output/internal_industry.json    (Family E)
+  output/internal_scholarship.json (Family G)
 
 Empty templates are fine — they produce a summary with no values, and the site cards stay
 "In development" until real figures are entered. Once entered, re-run this then inject_downstream.py.
 
 USAGE
-  python3 read_internal.py ../templates/GT_Licensing_Startups_Intake.xlsx ../templates/GT_Industry_Research_Intake.xlsx
+  python3 read_internal.py ../templates/GT_Licensing_Startups_Intake.xlsx ../templates/GT_Industry_Research_Intake.xlsx ../templates/GT_Scholarship_Recognition_Intake.xlsx
   python3 read_internal.py path/to/filled_template.xlsx
 """
 
@@ -25,11 +26,15 @@ LICENSING_KEYS = {"invention_disclosures", "licenses_options_executed", "licensi
                   "startups_formed", "startups_active"}
 INDUSTRY_KEYS = {"industry_sponsored_research_usd", "active_industry_agreements",
                  "corporate_affiliate_revenue_usd", "total_research_expenditures_usd"}
+SCHOLARSHIP_KEYS = {"highly_prestigious_awards", "national_academy_members", "honorary_society_members",
+                    "books_published", "nonse_research_expenditures_usd"}
 FAMILY_META = {
     "licensing": {"family": "licensing", "track": "Track 1 - Family A (licensing & startups)",
                   "source": "GT internal intake (Office of Technology Licensing / GTRC)"},
     "industry": {"family": "industry", "track": "Track 1 - Family E (industry research engagement)",
                  "source": "GT internal intake (GT Research / sponsored-programs accounting)"},
+    "scholarship": {"family": "scholarship", "track": "Track 1 - Family G (scholarship & recognition)",
+                    "source": "GT internal intake (Institutional Research / Provost / GT Research)"},
 }
 
 
@@ -77,7 +82,8 @@ def read_template(path: Path) -> dict:
             latest = {"year": ly, "value": by_year[str(ly)]}
         metrics[key] = {"label": label, "unit": unit, "by_year": by_year, "latest": latest}
 
-    fam = "licensing" if all_keys & LICENSING_KEYS else ("industry" if all_keys & INDUSTRY_KEYS else "unknown")
+    fam = ("licensing" if all_keys & LICENSING_KEYS else "industry" if all_keys & INDUSTRY_KEYS
+           else "scholarship" if all_keys & SCHOLARSHIP_KEYS else "unknown")
     meta = FAMILY_META.get(fam, {"family": fam, "track": "Track 1 - internal", "source": "GT internal intake"})
     return {"metric_provenance": meta, "metrics": metrics}
 

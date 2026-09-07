@@ -1,7 +1,7 @@
 {
   "meta": {
     "latest_year": 2024,
-    "updated": "2026-08-31",
+    "updated": "2026-09-07",
     "source": "USPTO Open Data Portal + SBIR.gov; benchmarked to NAI Top 100 Universities"
   },
   "familyB": {
@@ -127,6 +127,12 @@
         "status": "live",
         "desc": "Industry-sponsored research expenditures and active corporate research agreements.",
         "metrics": "<b>$63.5M</b> industry-sponsored research (FY2024) &middot; <b>4.2%</b> of total R&amp;D"
+      },
+      {
+        "name": "Scholarship & recognition",
+        "status": "live",
+        "desc": "Books published, scholarly output, humanities research funding, and faculty honors on the National Research Council list &mdash; the indicators the AAU uses, and the arts, humanities and social-science side of the Institute's research footprint.",
+        "metrics": "<b>9</b> books &amp; monographs (2025) &middot; <b>3</b> in arts, humanities &amp; social sciences &middot; <b>5</b> NEH awards since 2015"
       }
     ],
     "tier2": [
@@ -587,5 +593,307 @@
     ],
     "break_year": 2024,
     "reclass_shift_usd": 30000000
+  },
+  "familyG": {
+    "latest_year": 2025,
+    "span": [
+      2015,
+      2025
+    ],
+    "latest": {
+      "books": 9,
+      "books_ahss": 3,
+      "chapters": 177,
+      "works": 8541,
+      "citations": 26855
+    },
+    "cumulative": {
+      "books": 200,
+      "books_ahss": 57,
+      "chapters": 2419,
+      "works": 86362,
+      "citations": 2524542
+    },
+    "books_trend": [
+      {
+        "year": 2015,
+        "value": 25
+      },
+      {
+        "year": 2016,
+        "value": 26
+      },
+      {
+        "year": 2017,
+        "value": 31
+      },
+      {
+        "year": 2018,
+        "value": 28
+      },
+      {
+        "year": 2019,
+        "value": 23
+      },
+      {
+        "year": 2020,
+        "value": 11
+      },
+      {
+        "year": 2021,
+        "value": 15
+      },
+      {
+        "year": 2022,
+        "value": 8
+      },
+      {
+        "year": 2023,
+        "value": 12
+      },
+      {
+        "year": 2024,
+        "value": 12
+      },
+      {
+        "year": 2025,
+        "value": 9
+      }
+    ],
+    "ahss_trend": [
+      {
+        "year": 2015,
+        "value": 5
+      },
+      {
+        "year": 2016,
+        "value": 9
+      },
+      {
+        "year": 2017,
+        "value": 7
+      },
+      {
+        "year": 2018,
+        "value": 6
+      },
+      {
+        "year": 2019,
+        "value": 8
+      },
+      {
+        "year": 2020,
+        "value": 4
+      },
+      {
+        "year": 2021,
+        "value": 4
+      },
+      {
+        "year": 2022,
+        "value": 3
+      },
+      {
+        "year": 2023,
+        "value": 4
+      },
+      {
+        "year": 2024,
+        "value": 4
+      },
+      {
+        "year": 2025,
+        "value": 3
+      }
+    ],
+    "works_trend": [
+      {
+        "year": 2015,
+        "value": 6590
+      },
+      {
+        "year": 2016,
+        "value": 6787
+      },
+      {
+        "year": 2017,
+        "value": 7100
+      },
+      {
+        "year": 2018,
+        "value": 7399
+      },
+      {
+        "year": 2019,
+        "value": 7897
+      },
+      {
+        "year": 2020,
+        "value": 8596
+      },
+      {
+        "year": 2021,
+        "value": 8439
+      },
+      {
+        "year": 2022,
+        "value": 8816
+      },
+      {
+        "year": 2023,
+        "value": 8069
+      },
+      {
+        "year": 2024,
+        "value": 8128
+      },
+      {
+        "year": 2025,
+        "value": 8541
+      }
+    ],
+    "books_by_field": [
+      {
+        "label": "Engineering",
+        "count": 58
+      },
+      {
+        "label": "Social Sciences",
+        "count": 26
+      },
+      {
+        "label": "Computer Science",
+        "count": 24
+      },
+      {
+        "label": "Business, Management and Accounting",
+        "count": 12
+      },
+      {
+        "label": "Mathematics",
+        "count": 11
+      },
+      {
+        "label": "Materials Science",
+        "count": 9
+      },
+      {
+        "label": "Physics and Astronomy",
+        "count": 9
+      },
+      {
+        "label": "Decision Sciences",
+        "count": 7
+      },
+      {
+        "label": "Economics, Econometrics and Finance",
+        "count": 7
+      }
+    ],
+    "ahss_field_share": 0.285,
+    "excluded_count": 31,
+    "neh": {
+      "span": [
+        2015,
+        2025
+      ],
+      "awards": 5,
+      "usd": 773843,
+      "by_year": [
+        {
+          "year": 2015,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2016,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2017,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2018,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2019,
+          "awards": 1,
+          "usd": 99573
+        },
+        {
+          "year": 2020,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2021,
+          "awards": 2,
+          "usd": 99310
+        },
+        {
+          "year": 2022,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2023,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2024,
+          "awards": 1,
+          "usd": 349987
+        },
+        {
+          "year": 2025,
+          "awards": 1,
+          "usd": 224973
+        }
+      ],
+      "by_division": {
+        "Digital Humanities": {
+          "awards": 3,
+          "usd": 542512.95
+        },
+        "Research": {
+          "awards": 1,
+          "usd": 224973.0
+        },
+        "Preservation and Access": {
+          "awards": 1,
+          "usd": 6356.99
+        }
+      },
+      "by_program": {
+        "Digital Humanities Advancement Grants": {
+          "awards": 3,
+          "usd": 542512.95
+        },
+        "Collaborative Research": {
+          "awards": 1,
+          "usd": 224973.0
+        },
+        "Preservation Assistance Grants": {
+          "awards": 1,
+          "usd": 6356.99
+        }
+      }
+    },
+    "honors": {
+      "awards": null,
+      "awards_ahss": null,
+      "academy_members": null,
+      "society_members": null,
+      "books_aa": null,
+      "nonse_usd": null,
+      "awards_trend": []
+    },
+    "pulled": "2026-09-07"
   }
 }

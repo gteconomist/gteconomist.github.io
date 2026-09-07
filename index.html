@@ -414,6 +414,17 @@
     <div class="foot" id="dfootInd" style="margin-bottom:26px"></div>
     </div>
 
+    <div id="schBlock">
+    <div class="seclabel" style="margin-top:26px">Tier 1 &middot; Scholarship &amp; recognition <span>OpenAlex &middot; NEH &middot; AAU-style indicators</span></div>
+    <div class="kpis" id="dkpisSch"></div>
+    <div class="benchpill" id="dcumSch"></div>
+    <div class="dgrid2">
+      <div class="panel"><h2>Books &amp; monographs per year</h2><div class="sub">Books with a Georgia Tech author indexed in OpenAlex &middot; calendar years</div><div id="dtrendSch"></div></div>
+      <div class="panel"><h2>Books by field</h2><div class="sub" id="dfieldsubSch">Primary field of each book</div><div id="dfieldsSch"></div></div>
+    </div>
+    <div class="foot" id="dfootSch" style="margin-bottom:26px"></div>
+    </div>
+
     <div class="seclabel">Tier 1 &middot; Scorecard families <span>the full annual picture</span></div>
     <div class="fgrid" id="tier1fams"></div>
 
@@ -786,7 +797,7 @@ renderDefault();
 const DOWNSTREAM = {
   "meta": {
     "latest_year": 2024,
-    "updated": "2026-08-31",
+    "updated": "2026-09-07",
     "source": "USPTO Open Data Portal + SBIR.gov; benchmarked to NAI Top 100 Universities"
   },
   "familyB": {
@@ -912,6 +923,12 @@ const DOWNSTREAM = {
         "status": "live",
         "desc": "Industry-sponsored research expenditures and active corporate research agreements.",
         "metrics": "<b>$63.5M</b> industry-sponsored research (FY2024) &middot; <b>4.2%</b> of total R&amp;D"
+      },
+      {
+        "name": "Scholarship & recognition",
+        "status": "live",
+        "desc": "Books published, scholarly output, humanities research funding, and faculty honors on the National Research Council list &mdash; the indicators the AAU uses, and the arts, humanities and social-science side of the Institute's research footprint.",
+        "metrics": "<b>9</b> books &amp; monographs (2025) &middot; <b>3</b> in arts, humanities &amp; social sciences &middot; <b>5</b> NEH awards since 2015"
       }
     ],
     "tier2": [
@@ -1372,9 +1389,312 @@ const DOWNSTREAM = {
     ],
     "break_year": 2024,
     "reclass_shift_usd": 30000000
+  },
+  "familyG": {
+    "latest_year": 2025,
+    "span": [
+      2015,
+      2025
+    ],
+    "latest": {
+      "books": 9,
+      "books_ahss": 3,
+      "chapters": 177,
+      "works": 8541,
+      "citations": 26855
+    },
+    "cumulative": {
+      "books": 200,
+      "books_ahss": 57,
+      "chapters": 2419,
+      "works": 86362,
+      "citations": 2524542
+    },
+    "books_trend": [
+      {
+        "year": 2015,
+        "value": 25
+      },
+      {
+        "year": 2016,
+        "value": 26
+      },
+      {
+        "year": 2017,
+        "value": 31
+      },
+      {
+        "year": 2018,
+        "value": 28
+      },
+      {
+        "year": 2019,
+        "value": 23
+      },
+      {
+        "year": 2020,
+        "value": 11
+      },
+      {
+        "year": 2021,
+        "value": 15
+      },
+      {
+        "year": 2022,
+        "value": 8
+      },
+      {
+        "year": 2023,
+        "value": 12
+      },
+      {
+        "year": 2024,
+        "value": 12
+      },
+      {
+        "year": 2025,
+        "value": 9
+      }
+    ],
+    "ahss_trend": [
+      {
+        "year": 2015,
+        "value": 5
+      },
+      {
+        "year": 2016,
+        "value": 9
+      },
+      {
+        "year": 2017,
+        "value": 7
+      },
+      {
+        "year": 2018,
+        "value": 6
+      },
+      {
+        "year": 2019,
+        "value": 8
+      },
+      {
+        "year": 2020,
+        "value": 4
+      },
+      {
+        "year": 2021,
+        "value": 4
+      },
+      {
+        "year": 2022,
+        "value": 3
+      },
+      {
+        "year": 2023,
+        "value": 4
+      },
+      {
+        "year": 2024,
+        "value": 4
+      },
+      {
+        "year": 2025,
+        "value": 3
+      }
+    ],
+    "works_trend": [
+      {
+        "year": 2015,
+        "value": 6590
+      },
+      {
+        "year": 2016,
+        "value": 6787
+      },
+      {
+        "year": 2017,
+        "value": 7100
+      },
+      {
+        "year": 2018,
+        "value": 7399
+      },
+      {
+        "year": 2019,
+        "value": 7897
+      },
+      {
+        "year": 2020,
+        "value": 8596
+      },
+      {
+        "year": 2021,
+        "value": 8439
+      },
+      {
+        "year": 2022,
+        "value": 8816
+      },
+      {
+        "year": 2023,
+        "value": 8069
+      },
+      {
+        "year": 2024,
+        "value": 8128
+      },
+      {
+        "year": 2025,
+        "value": 8541
+      }
+    ],
+    "books_by_field": [
+      {
+        "label": "Engineering",
+        "count": 58
+      },
+      {
+        "label": "Social Sciences",
+        "count": 26
+      },
+      {
+        "label": "Computer Science",
+        "count": 24
+      },
+      {
+        "label": "Business, Management and Accounting",
+        "count": 12
+      },
+      {
+        "label": "Mathematics",
+        "count": 11
+      },
+      {
+        "label": "Materials Science",
+        "count": 9
+      },
+      {
+        "label": "Physics and Astronomy",
+        "count": 9
+      },
+      {
+        "label": "Decision Sciences",
+        "count": 7
+      },
+      {
+        "label": "Economics, Econometrics and Finance",
+        "count": 7
+      }
+    ],
+    "ahss_field_share": 0.285,
+    "excluded_count": 31,
+    "neh": {
+      "span": [
+        2015,
+        2025
+      ],
+      "awards": 5,
+      "usd": 773843,
+      "by_year": [
+        {
+          "year": 2015,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2016,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2017,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2018,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2019,
+          "awards": 1,
+          "usd": 99573
+        },
+        {
+          "year": 2020,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2021,
+          "awards": 2,
+          "usd": 99310
+        },
+        {
+          "year": 2022,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2023,
+          "awards": 0,
+          "usd": 0
+        },
+        {
+          "year": 2024,
+          "awards": 1,
+          "usd": 349987
+        },
+        {
+          "year": 2025,
+          "awards": 1,
+          "usd": 224973
+        }
+      ],
+      "by_division": {
+        "Digital Humanities": {
+          "awards": 3,
+          "usd": 542512.95
+        },
+        "Research": {
+          "awards": 1,
+          "usd": 224973.0
+        },
+        "Preservation and Access": {
+          "awards": 1,
+          "usd": 6356.99
+        }
+      },
+      "by_program": {
+        "Digital Humanities Advancement Grants": {
+          "awards": 3,
+          "usd": 542512.95
+        },
+        "Collaborative Research": {
+          "awards": 1,
+          "usd": 224973.0
+        },
+        "Preservation Assistance Grants": {
+          "awards": 1,
+          "usd": 6356.99
+        }
+      }
+    },
+    "honors": {
+      "awards": null,
+      "awards_ahss": null,
+      "academy_members": null,
+      "society_members": null,
+      "books_aa": null,
+      "nonse_usd": null,
+      "awards_trend": []
+    },
+    "pulled": "2026-09-07"
   }
 };
-/* DOWNSTREAM_DATA_END *//* ---- Tier 3 alumni entrepreneurship (PRELIMINARY) ----------------------------
+/* DOWNSTREAM_DATA_END */
+/* ---- Tier 3 alumni entrepreneurship (PRELIMINARY) ----------------------------
    Defined OUTSIDE the DOWNSTREAM_DATA block on purpose: inject_downstream.py
    regenerates everything between DOWNSTREAM_DATA_START/END, so anything placed
    in there would be destroyed on the next pipeline run. This survives it.
@@ -1795,6 +2115,88 @@ function renderDFootInd(){
     'base: award-level records for FY2024 show 400+ distinct corporate sponsors, with the ten largest '+
     'accounting for about a third of dollars. Source: NSF HERD survey / GT research administration.');
 }
+function renderDKPIsSch(){
+  const d=DOWNSTREAM.familyG, block=document.getElementById("schBlock");
+  if(!d){ if(block) block.hidden=true; return; }
+  const L=d.latest, y=d.latest_year, h=d.honors||{}, neh=d.neh;
+  let cards;
+  if(h.awards){
+    cards=[
+      {v:fmtInt(h.awards.value),                 l:"Highly prestigious faculty awards &middot; "+h.awards.year},
+      {v:h.academy_members?fmtInt(h.academy_members.value):"&mdash;", l:"National Academy members"+(h.academy_members?" &middot; "+h.academy_members.year:"")},
+      {v:fmtInt(L.books),                        l:"Books &amp; monographs &middot; "+y},
+      {v:neh?"$"+(neh.usd/1e6).toFixed(2)+"M":"&mdash;", l:"NEH awards &middot; cumulative "+(neh?neh.span[0]+"&ndash;"+neh.span[1]:"")}
+    ];
+  } else {
+    cards=[
+      {v:fmtInt(L.books),                        l:"Books &amp; monographs &middot; "+y},
+      {v:fmtInt(L.books_ahss),                   l:"Arts, humanities &amp; social sciences &middot; "+y},
+      {v:L.works?fmtInt(L.works):"&mdash;",      l:"Scholarly works of all types &middot; "+y},
+      {v:neh?"$"+(neh.usd/1e6).toFixed(2)+"M":"&mdash;", l:"NEH awards &middot; cumulative "+(neh?neh.span[0]+"&ndash;"+neh.span[1]:"")}
+    ];
+  }
+  const sel=d3.select("#dkpisSch").selectAll(".kpi").data(cards);
+  const ent=sel.enter().append("div").attr("class","kpi");
+  ent.append("div").attr("class","v"); ent.append("div").attr("class","l");
+  const all=ent.merge(sel);
+  all.select(".v").html(x=>x.v); all.select(".l").html(x=>x.l);
+  const c=d.cumulative;
+  d3.select("#dcumSch").html('<span class="bk">&#931;</span><span>Cumulative '+d.span[0]+'&ndash;'+d.span[1]+': '
+    +fmtInt(c.books)+' books &amp; monographs ('+fmtInt(c.books_ahss)+' in the arts, humanities and social sciences), '
+    +fmtInt(c.chapters)+' book chapters'
+    +(c.works?', and '+fmtInt(c.works)+' scholarly works of all types':'')
+    +(neh?'; '+neh.awards+' NEH awards totaling $'+(neh.usd/1e6).toFixed(2)+'M':'')+'.</span>');
+}
+function renderDTrendSch(){
+  const d=DOWNSTREAM.familyG; if(!d) return;
+  drawTrend(d3.select("#dtrendSch"), d.books_trend, {stroke:"#003057", dot:"#B3A369",
+    areaFill:"rgba(0,48,87,.10)", yfmt:d3.format(",.0f")});
+}
+function renderDFieldsSch(){
+  const d=DOWNSTREAM.familyG; if(!d) return;
+  const a=(d.books_by_field||[]).slice(0,9); if(!a.length) return;
+  const max=d3.max(a,x=>x.count)||1, wpx=150;
+  d3.select("#dfieldsubSch").html("Primary field of each book &middot; "+d.span[0]+"&ndash;"+d.span[1]
+    +(d.ahss_field_share!=null?" &middot; "+Math.round(d.ahss_field_share*100)+"% arts, humanities &amp; social sciences":""));
+  d3.select("#dfieldsSch").html(a.map(x=>
+    `<div class="darea"><span class="dlab">${x.label}</span><span class="dbar" style="width:${Math.max(8,x.count/max*wpx)}px"></span><span class="dval">${x.count}</span></div>`).join(""));
+}
+function renderDFootSch(){
+  const d=DOWNSTREAM.familyG; if(!d) return;
+  const L=d.latest, neh=d.neh, h=d.honors||{};
+  let nehTxt='';
+  if(neh){
+    const divs=Object.entries(neh.by_division||{}).sort((a,b)=>b[1].usd-a[1].usd).slice(0,3)
+      .map(([k,v])=>k+' ('+v.awards+')').join(', ');
+    nehTxt='<b>Humanities research funding:</b> the National Endowment for the Humanities has made '+neh.awards+
+      ' competitive awards to Georgia Tech since '+neh.span[0]+' totaling $'+(neh.usd/1e6).toFixed(2)+'M'+
+      (divs?' &mdash; '+divs:'')+' &mdash; the liberal-arts counterpart to the SBIR/STTR family above, counted from NEH&rsquo;s public grant records. ';
+  }
+  let honorsTxt='';
+  if(h.awards){
+    honorsTxt='<b>Faculty honors:</b> '+fmtInt(h.awards.value)+' Georgia Tech faculty received an award, fellowship or membership on the '+
+      'National Research Council list of highly prestigious awards in '+h.awards.year+
+      (h.awards_ahss?' ('+fmtInt(h.awards_ahss.value)+' in the arts, humanities and social sciences)':'')+
+      (h.academy_members?'; '+fmtInt(h.academy_members.value)+' current faculty are members of the National Academies of Sciences, Engineering or Medicine':'')+
+      (h.society_members?' and '+fmtInt(h.society_members.value)+' of the American Academy of Arts and Sciences, the American Philosophical Society or the National Academy of Education':'')+
+      '. Reported by Georgia Tech Institutional Research on the definitions the AAU uses for its membership indicators. ';
+  } else {
+    honorsTxt='<b>Coming next:</b> faculty awards, fellowships and memberships on the National Research Council list of highly prestigious awards, '+
+      'and National Academy membership &mdash; the AAU&rsquo;s Phase I faculty-honors indicator &mdash; from Georgia Tech Institutional Research. ';
+  }
+  d3.select("#dfootSch").html(
+    '<b>How these are built:</b> These are the indicators the Association of American Universities uses to assess research universities &mdash; '+
+    'books, citations, faculty honors and competitive federal funding &mdash; applied to Georgia Tech so that scholarship in the arts, humanities '+
+    'and social sciences is counted alongside patents and licenses. <b>Books:</b> books and monographs with at least one Georgia Tech-affiliated '+
+    'author, by year of publication, from OpenAlex, the open scholarly index; edited conference-proceedings volumes and datasets are removed'+
+    (d.excluded_count?' ('+d.excluded_count+' records over the period)':'')+'. The most recent year rises as indexing catches up. '+
+    'This is an open-data approximation of the Academic Analytics book count the AAU uses, not a substitute for it. '+
+    (L.works?'<b>Scholarly output:</b> Georgia Tech authors produced '+fmtInt(L.works)+' indexed works of all types in '+d.latest_year+
+      ' (articles, chapters, proceedings, books)'+(L.chapters?', including '+fmtInt(L.chapters)+' book chapters':'')+'. ':'')+
+    nehTxt+honorsTxt+
+    'Counts are annual and directly auditable &mdash; no modeling, no attribution assumptions. Sources: OpenAlex'+(d.pulled?' ('+d.pulled+')':'')+
+    '; NEH grant data (data.gov); Georgia Tech Institutional Research.');
+}
 let downstreamRendered=false;
 function renderDownstream(){
   if(downstreamRendered) return;
@@ -1803,6 +2205,7 @@ function renderDownstream(){
   renderDKPIsTal(); renderDTrendTal(); renderDLevelsTal();
   renderDKPIsLic(); renderDTrendLic(); renderDStartsLic(); renderDFootLic();
   renderDKPIsInd(); renderDTrendInd(); renderDShareInd(); renderDFootInd();
+  renderDKPIsSch(); renderDTrendSch(); renderDFieldsSch(); renderDFootSch();
   renderDFamilies();
   renderT3();
   downstreamRendered=true;
