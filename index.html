@@ -362,7 +362,7 @@
 
     <div class="tierrow">
       <div class="tiercard t1"><div class="tt"><span class="dot"></span>Tier 1 &middot; Counted</div><div class="td">Directly counted, standardized, refreshed annually. High certainty. Pairs one-for-one with the upstream impact.</div></div>
-      <div class="tiercard t2"><div class="tt"><span class="dot"></span>Tier 2 &middot; Matched</div><div class="td">Built from matched administrative data with stated assumptions. Medium certainty. In development.</div></div>
+      <div class="tiercard t2"><div class="tt"><span class="dot"></span>Tier 2 &middot; Matched</div><div class="td">Built from matched administrative data with stated assumptions. Medium certainty. First figures published as preliminary.</div></div>
       <div class="tiercard t3"><div class="tt"><span class="dot"></span>Tier 3 &middot; Modeled</div><div class="td">Modeled or survey-based diffusion effects, run as a periodic deep-dive study. Directional.</div></div>
     </div>
 
@@ -428,8 +428,23 @@
     <div class="seclabel">Tier 1 &middot; Scorecard families <span>the full annual picture</span></div>
     <div class="fgrid" id="tier1fams"></div>
 
-    <div class="seclabel" style="margin-top:26px">Tier 2 &middot; Venture growth <span>matched data &middot; in development</span></div>
+    <div class="seclabel" style="margin-top:26px">Tier 2 &middot; Venture growth <span>matched data &middot; preliminary</span></div>
     <div class="fgrid" id="tier2fams"></div>
+
+    <div id="t2Block">
+    <div class="t3note"><b>Preliminary &mdash; companies with a documented Georgia Tech program relationship.</b>
+      These are companies that licensed Georgia Tech technology through the Office of Technology
+      Licensing, or that were members of ATDC, the Institute&rsquo;s technology incubator. Every
+      company was matched to an administrative record; none entered through founder biographies.
+      Activity is reported as it stands at these companies, not as a Georgia Tech-attributed total.
+      Figures are lower bounds &mdash; see the notes below the charts.</div>
+    <div class="kpis" id="dkpisT2"></div>
+    <div class="dgrid2">
+      <div class="panel"><h2>Companies by relationship</h2><div class="sub" id="drelsubT2">How each company connects to Georgia Tech</div><div id="drelT2"></div></div>
+      <div class="panel"><h2>Sector mix</h2><div class="sub" id="dsectorsubT2">Georgia-headquartered companies by primary sector</div><div id="dsectorsT2"></div></div>
+    </div>
+    <div class="foot" id="dfootT2" style="margin-bottom:26px"></div>
+    </div>
 
     <div class="seclabel" style="margin-top:26px">Tier 3 &middot; Diffusion &amp; alumni impact <span>modeled &middot; periodic study</span></div>
 
@@ -438,8 +453,8 @@
       These figures cover companies founded by Georgia Tech <i>alumni</i>. They are not
       Georgia Tech spin-outs, and no causal claim is made: this is activity at
       alumni-founded firms, reported separately from the Institute&rsquo;s own output.
-      Licensed-IP and faculty-founded companies (Tier 2) are not yet included. Figures
-      are lower bounds and will be restated &mdash; see the notes below the charts.</div>
+      Companies that also hold a Georgia Tech licence or an ATDC relationship are counted here
+      only, not repeated in Tier 2. Figures are lower bounds and will be restated &mdash; see the notes below the charts.</div>
     <div class="kpis" id="dkpisT3"></div>
     <div class="dgrid2">
       <div class="panel"><h2>Equity capital raised per year</h2><div class="sub">Georgia-headquartered alumni-founded companies &middot; equity rounds only</div><div id="dtrendT3"></div></div>
@@ -1840,6 +1855,121 @@ if (DOWNSTREAM.families && DOWNSTREAM.families.tier3 && DOWNSTREAM.families.tier
     + "B</b> equity capital &middot; <b>"
     + DOWNSTREAM_T3.headline.ga_employees.toLocaleString() + "</b> employees";
 }
+/* ---- Tier 2 program-affiliated start-ups (PRELIMINARY) --------------------------
+   Also outside the regenerated block. Source: OTL start-up list (31 Aug 2026) and ATDC
+   roster, resolved in PitchBook and de-duplicated against the alumni universe by ATDC,
+   September 2026. Regenerate from downstream-pipeline/output/tier2_metrics.json
+   (scripts/build_tier2.py), then re-run scripts/patch_tier2.py after removing this block. */
+const DOWNSTREAM_T2 = {
+  "meta": {
+    "otl_file_date": "2026-08-31",
+    "atdc_export_date": "2026-09-02",
+    "prepared_by": "ATDC (Caroline M. Ford) for CEDR",
+    "built": "2026-09-09"
+  },
+  "headline": {
+    "companies": 441,
+    "companies_otl": 65,
+    "companies_atdc": 376,
+    "companies_hq_known": 391,
+    "ga_companies": 311,
+    "ga_capital_musd": 3258.0,
+    "ga_capital_reporting": 186,
+    "total_capital_musd": 6460.4,
+    "total_capital_reporting": 233,
+    "ga_employees": 6605,
+    "ga_employees_reporting": 253,
+    "total_employees": 8767,
+    "total_employees_reporting": 319,
+    "otl_closed": 18,
+    "otl_closed_share": 0.277,
+    "already_in_alumni_layer": {
+      "atdc": 52,
+      "otl": 19
+    },
+    "otl_not_in_pitchbook": 56,
+    "atdc_survey_only_musd": 42.6
+  },
+  "top_capital": [
+    {
+      "company": "Sila Nanotechnologies",
+      "hq": "Alameda, CA",
+      "musd": 1608.5
+    },
+    {
+      "company": "Smart Wires",
+      "hq": "Durham, NC",
+      "musd": 632.7
+    },
+    {
+      "company": "Turbine",
+      "hq": "New York, NY",
+      "musd": 314.2
+    }
+  ],
+  "relationships": [
+    {
+      "relationship": "ATDC \u2014 former member",
+      "companies": 161
+    },
+    {
+      "relationship": "ATDC \u2014 graduate",
+      "companies": 98
+    },
+    {
+      "relationship": "ATDC \u2014 Accelerate",
+      "companies": 92
+    },
+    {
+      "relationship": "OTL \u2014 licensed Georgia Tech technology",
+      "companies": 65
+    },
+    {
+      "relationship": "ATDC \u2014 Signature",
+      "companies": 25
+    }
+  ],
+  "sectors": [
+    {
+      "sector": "Information Technology",
+      "companies": 145
+    },
+    {
+      "sector": "Healthcare",
+      "companies": 71
+    },
+    {
+      "sector": "Business Products and Services (B2B)",
+      "companies": 38
+    },
+    {
+      "sector": "Consumer Products and Services (B2C)",
+      "companies": 25
+    },
+    {
+      "sector": "Financial Services",
+      "companies": 19
+    },
+    {
+      "sector": "Energy",
+      "companies": 7
+    },
+    {
+      "sector": "Materials and Resources",
+      "companies": 5
+    }
+  ]
+};
+if (DOWNSTREAM.families && DOWNSTREAM.families.tier2 && DOWNSTREAM.families.tier2[0]) {
+  DOWNSTREAM.families.tier2[0].status  = "preliminary";
+  DOWNSTREAM.families.tier2[0].name    = "Program-affiliated startups";
+  DOWNSTREAM.families.tier2[0].desc    = "Companies that licensed Georgia Tech technology or came through ATDC, matched to administrative records: where they are headquartered, capital raised, employment, and how many are still operating.";
+  DOWNSTREAM.families.tier2[0].metrics =
+    "<b>" + DOWNSTREAM_T2.headline.ga_companies + "</b> Georgia companies &middot; <b>$"
+    + (DOWNSTREAM_T2.headline.ga_capital_musd/1000).toFixed(2)
+    + "B</b> capital raised &middot; <b>"
+    + DOWNSTREAM_T2.headline.ga_employees.toLocaleString() + "</b> employees";
+}
 const fmtInt = d3.format(",.0f");
 function dStatusChip(s){ const l={live:"Live",building:"In development",planned:"Planned",preliminary:"Preliminary"}[s]||s; return `<span class="status ${s}">${l}</span>`; }
 function renderDKPIs(){
@@ -1979,6 +2109,53 @@ function renderDLevelsTal(){
   d3.select("#dlevelssub").html("Degrees by level &middot; "+L.year);
   d3.select("#dlevelsTal").html(a.map(x=>
     `<div class="darea"><span class="dlab">${x.label}</span><span class="dbar" style="width:${Math.max(8,x.v/max*wpx)}px"></span><span class="dval">${fmtInt(x.v)}</span></div>`).join(""));
+}
+function renderT2(){
+  const T=DOWNSTREAM_T2, h=T.headline;
+  const cards=[
+    {v:fmtInt(h.ga_companies),                        l:"Georgia-headquartered companies"},
+    {v:"$"+(h.ga_capital_musd/1000).toFixed(2)+"B",   l:"Capital raised by Georgia companies &middot; lifetime"},
+    {v:fmtInt(h.ga_employees),                        l:"Employees at Georgia companies&#8202;<sup>&dagger;</sup>"},
+    {v:Math.round(h.otl_closed_share*100)+"%",        l:"Licensed-technology startups no longer operating"}
+  ];
+  const sel=d3.select("#dkpisT2").selectAll(".kpi").data(cards);
+  const ent=sel.enter().append("div").attr("class","kpi");
+  ent.append("div").attr("class","v"); ent.append("div").attr("class","l");
+  const all=ent.merge(sel);
+  all.select(".v").html(d=>d.v); all.select(".l").html(d=>d.l);
+
+  const wpx=150;
+  const r=T.relationships, rmax=d3.max(r,d=>d.companies)||1;
+  d3.select("#drelsubT2").html("How each company connects to Georgia Tech &middot; n="+fmtInt(h.companies));
+  d3.select("#drelT2").html(r.map(d=>
+    `<div class="darea"><span class="dlab">${d.relationship}</span><span class="dbar" style="width:${Math.max(8,d.companies/rmax*wpx)}px"></span><span class="dval">${d.companies}</span></div>`).join(""));
+  const s=T.sectors, smax=d3.max(s,d=>d.companies)||1;
+  d3.select("#dsectorsubT2").html("Georgia-headquartered companies by primary sector &middot; n="+fmtInt(h.ga_companies));
+  d3.select("#dsectorsT2").html(s.map(d=>
+    `<div class="darea"><span class="dlab">${d.sector}</span><span class="dbar" style="width:${Math.max(8,d.companies/smax*wpx)}px"></span><span class="dval">${d.companies}</span></div>`).join(""));
+
+  const top=T.top_capital;
+  d3.select("#dfootT2").html(
+    '<b>How these are built:</b> '+fmtInt(h.companies)+' companies with a documented Georgia Tech '+
+    'relationship &mdash; '+fmtInt(h.companies_otl)+' that licensed Georgia Tech technology through the Office of '+
+    'Technology Licensing and '+fmtInt(h.companies_atdc)+' ATDC member companies (relationship 2010 or later, '+
+    'founded 2005 or later) &mdash; each resolved to a PitchBook record and checked against the alumni '+
+    'layer so no company is counted twice; companies with these relationships that already appear in Tier 3 ('+
+    h.already_in_alumni_layer.atdc+' ATDC, '+h.already_in_alumni_layer.otl+' licensees, some both) are not repeated. '+
+    'Capital is PitchBook lifetime capital, disclosed for '+fmtInt(h.total_capital_reporting)+' of the '+
+    fmtInt(h.companies)+' companies ($'+(h.total_capital_musd/1000).toFixed(2)+'B in total); blanks mean '+
+    'no recorded figure, not no capital, so totals are lower bounds. Capital is concentrated: '+
+    top[0].company+' ('+top[0].hq+', $'+(top[0].musd/1000).toFixed(2)+'B) and '+top[1].company+' ('+top[1].hq+
+    ', $'+fmtInt(top[1].musd)+'M) hold about a third of the total and are headquartered outside Georgia. '+
+    'Georgia counts use current headquarters; '+fmtInt(h.companies-h.companies_hq_known)+' companies have no location on record. '+
+    '<sup>&dagger;</sup>&#8202;Employment reflects the '+fmtInt(h.ga_employees_reporting)+' Georgia companies reporting headcount. '+
+    'The closure rate is measured on the licensed-technology cohort only ('+fmtInt(h.otl_closed)+' of '+fmtInt(h.companies_otl)+
+    ' out of business or in bankruptcy), because an administrative list keeps failed companies where '+
+    'database sources do not; ATDC records carry no operating status. '+
+    '<b>Not counted:</b> '+fmtInt(h.otl_not_in_pitchbook)+' licensed-technology companies with no PitchBook record at all, '+
+    'and $'+h.atdc_survey_only_musd.toFixed(1)+'M self-reported to ATDC by companies PitchBook records with no capital. '+
+    'Company lists from Georgia Tech OTL (31 August 2026) and ATDC; PitchBook data exported 1&ndash;2 September 2026; '+
+    'matching and de-duplication by ATDC, with CEDR review. VentureLab and CREATE-X company lists are still to be added.');
 }
 function renderT3(){
   const T=DOWNSTREAM_T3, h=T.headline;
@@ -2207,6 +2384,7 @@ function renderDownstream(){
   renderDKPIsInd(); renderDTrendInd(); renderDShareInd(); renderDFootInd();
   renderDKPIsSch(); renderDTrendSch(); renderDFieldsSch(); renderDFootSch();
   renderDFamilies();
+  renderT2();
   renderT3();
   downstreamRendered=true;
 }
